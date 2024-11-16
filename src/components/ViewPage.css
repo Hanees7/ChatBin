@@ -28,6 +28,7 @@ border:none;
     background-color: #555;
 border:none;
 margin-top: 50px;
+min-height: 85vh;
 }
 .footer{
 height: 9vh;
