@@ -51,18 +51,17 @@ const ViewTextPage = () => {
         {loading ? (
           <p>Loading...</p> // Show loading message while fetching the text
         ) : (
-          <pre style={{overflowX:"hidden", color: "lightcyan", padding: "20px" }}>{text}</pre> // Display the fetched text
+          <pre style={{overflowX:"hidden", color: "lightcyan", padding: "40px" }}>{text}</pre> // Display the fetched text
         )}
       </div>
-
       <div className="footer" style={{position:"fixed", bottom:"0", width:"100%"}}>
         <div style={{ display: "flex", justifyContent: "space-between", paddingTop: "10px" }}>
-          <span style={{ color: "whitesmoke" }}>©2024 copyright Reserved</span>
+          <span style={{ color: "whitesmoke" }}>©2024 copyright Reserved</span>     1```` ``
           <span style={{ color: "lightcyan" }}>Made  With ❤️ By Hanees</span>
         </div>
       </div>
     </div>
   );
-};
+}; 
 
 export default ViewTextPage;
