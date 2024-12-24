@@ -1,9 +1,13 @@
-// src/components/Firebase.jsx
-
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, doc, getDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  doc,
+  getDoc,
+  Timestamp
+} from "firebase/firestore"; // Add Timestamp here
 
-// Your Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyClprjF7Z0f1yyDSyVRnDYfdf8yvp-HBJ0",
   authDomain: "chatbin-eb80f.firebaseapp.com",
@@ -18,5 +22,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 
-// Exporting Firestore methods
-export { firestore, collection, addDoc, doc, getDoc };
+// Export Firestore and Timestamp
+export { firestore, collection, addDoc, doc, getDoc, Timestamp }; // Export Timestamp here

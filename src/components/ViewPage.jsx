@@ -2,39 +2,69 @@ import React, { useState } from "react";
 import "../components/ViewPage.css";
 import { LuSaveAll } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";  
-import { firestore, collection, addDoc } from "../components/Firebase";  
-
+// import { firestore, collection, addDoc } from "../components/Firebase";  
+import {
+  firestore,
+  collection,
+  addDoc,
+  Timestamp
+} from "../components/Firebase"; 
 const ViewPage = () => {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();  
 
-  const handleClick = async () => {
-    if (!text.trim()) {
-      alert("Please enter some text before saving.");
-      return;
-    }
+  // const handleClick = async () => {
+  //   if (!text.trim()) {
+  //     alert("Please enter some text before saving.");
+  //     return;
+  //   }
 
-    try {
-      setLoading(true);
-      // Save the text to Firebase Firestore
-      const docRef = await addDoc(collection(firestore, "texts"), {
-        content: text,
-        timestamp: new Date(),
-      });
+  //   try {
+  //     setLoading(true);
+  //     // Save the text to Firebase Firestore
+  //     const docRef = await addDoc(collection(firestore, "texts"), {
+  //       content: text,
+  //       timestamp: new Date(),
+  //     });
 
-      // Get the document ID (which will be used as part of the URL)
-      const docId = docRef.id;
+  //     // Get the document ID (which will be used as part of the URL)
+  //     const docId = docRef.id;
 
-      // Redirect to a new URL using the document ID
-      navigate(`/view/${docId}`);  // Updated to use navigate
-    } catch (error) {
-      alert("Error saving text: " + error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     // Redirect to a new URL using the document ID
+  //     navigate(`/view/${docId}`);  // Updated to use navigate
+  //   } catch (error) {
+  //     alert("Error saving text: " + error.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+const handleClick = async () => {
+  if (!text.trim()) {
+    alert("Please enter some text before saving.");
+    return;
+  }
 
+  try {
+    setLoading(true);
+    // Save the text to Firebase Firestore with a creation timestamp
+    const docRef = await addDoc(collection(firestore, "texts"), {
+      content: text,
+      timestamp: new Date(),
+      createdAt: Timestamp.now() // Add timestamp for when the document was created
+    });
+
+    // Get the document ID (which will be used as part of the URL)
+    const docId = docRef.id;
+
+    // Redirect to a new URL using the document ID
+    navigate(`/view/${docId}`); // Updated to use navigate
+  } catch (error) {
+    alert("Error saving text: " + error.message);
+  } finally {
+    setLoading(false);
+  }
+};
   const handleChange = (e) => {
     setText(e.target.value);
   };
